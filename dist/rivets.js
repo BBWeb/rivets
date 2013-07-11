@@ -1,6 +1,7 @@
 // Rivets.js
-// version: 0.5.11
+// version: 0.5.11.X
 // author: Michael Richards
+// modified by Victor Lindhe, victorlindhe@gmail.com
 // license: MIT
 (function() {
   var Rivets,
@@ -79,11 +80,13 @@
     };
 
     Binding.prototype.eventHandler = function(fn) {
-      var binding, handler;
+      var binding, handler, self;
 
       handler = (binding = this).view.config.handler;
+      self = binding.view.models[binding.key];
+
       return function(ev) {
-        return handler.call(fn, this, ev, binding);
+        return handler.call(fn, self, ev, binding);
       };
     };
 
