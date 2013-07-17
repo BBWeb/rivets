@@ -960,6 +960,14 @@
         return _results;
       }
     },
+    "style-*": function(el, value) {
+      if(this.args[0].indexOf('-') === -1) {
+        return el.style[this.args[0]] = value;
+      } else {
+        // When we want to add for example a unit
+        return el.style[this.args[0].split('-')[0]] = value + this.args[0].split('-')[1];  
+      }
+    },
     "class-*": function(el, value) {
       var elClass;
 
