@@ -313,6 +313,7 @@
       this.build = __bind(this.build, this);
       this.componentRegExp = __bind(this.componentRegExp, this);
       this.bindingRegExp = __bind(this.bindingRegExp, this);
+      this.onSync = __bind(this.onSync, this);
       if (!(this.els.jquery || this.els instanceof Array)) {
         this.els = [this.els];
       }
@@ -531,6 +532,8 @@
     View.prototype.sync = function() {
       var binding, _i, _len, _ref, _results;
 
+      if(typeof this.onSyncFn !== 'undefined') this.onSyncFn.call(this);
+
       _ref = this.bindings;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -538,6 +541,10 @@
         _results.push(binding.sync());
       }
       return _results;
+    };
+
+    View.prototype.onSync = function(fn) {
+      this.onSyncFn = fn;
     };
 
     View.prototype.publish = function() {
