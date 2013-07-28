@@ -98,6 +98,12 @@
     };
 
     Binding.prototype.sync = function() {
+      if(typeof this.iterated !== 'undefined' && this.iterated instanceof Array) {
+        for(var i=0; i<this.iterated.length; i++) {
+          this.iterated[i].sync();
+        }
+      }
+      
       return this.set(this.options.bypass ? this.model[this.keypath] : this.view.config.adapter.read(this.model, this.keypath));
     };
 
